@@ -23,7 +23,7 @@ test_display = False
 test_write_video = True
 path_work_dir = "rl_3d/"
 vizdoom_path = "ViZDoom/"
-vizdoom_scenario = vizdoom_path + "scenarios/sabsesasta2.wad"
+vizdoom_scenario = vizdoom_path + "scenarios/sabsesasta.wad"
 
 if (lab):
     from env_lab import EnvLab
@@ -387,7 +387,7 @@ def Test(agent):
         out_video = cv2.VideoWriter(path_work_dir + "test.avi", fourcc, fps, size)
 
     reward_total = 0
-    num_episodes = 30
+    num_episodes = 60
     while (num_episodes != 0):
         if (not env.IsRunning()):
             env.Reset()
