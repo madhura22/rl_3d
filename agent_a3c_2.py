@@ -23,14 +23,14 @@ test_display = False
 test_write_video = True
 path_work_dir = "rl_3d/"
 vizdoom_path = "ViZDoom/"
-vizdoom_scenario = vizdoom_path + "scenarios/health_gathering_supreme.wad"
+vizdoom_scenario = vizdoom_path + "scenarios/sabsesasta2.wad"
 
 if (lab):
     from env_lab import EnvLab
 
     model_path = path_work_dir + "model_lab_a3c/"
 else:
-    from env_vizdoom_2 import EnvVizDoom
+    from env_vizdoom_1 import EnvVizDoom
 
     model_path = path_work_dir + "model_vizdoom_a3c/"
 
