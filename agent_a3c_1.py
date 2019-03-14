@@ -23,7 +23,7 @@ test_display = False
 test_write_video = True
 path_work_dir = "rl_3d/"
 vizdoom_path = "ViZDoom/"
-vizdoom_scenario = vizdoom_path + "scenarios/dumbell.wad"
+vizdoom_scenario = vizdoom_path + "scenarios/sabsesasta.wad"
 
 if (lab):
     from env_lab import EnvLab
@@ -36,11 +36,11 @@ else:
 
 learning_rate = 0.00025
 device = "/cpu:0"
-num_workers = 3
+num_workers = 8
 t_max = 30
 frame_repeat =  4 #10  # 4
 gamma = 0.99
-step_num = int(2.5e5)
+step_num = int(5e5)
 save_each = 0.01 * step_num
 step_load = 100
 entropy_beta = 0.01
