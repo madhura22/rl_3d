@@ -1,3 +1,23 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @madhura22
+Sign out
+0
+0 2 madhura22/rl_3d
+forked from yculcarnee/rl_3d
+ Code  Pull requests 0  Projects 0  Wiki  Insights  Settings
+rl_3d/agent_dqn_1.py
+@madhura22 madhura22 Update agent_dqn_1.py
+7f8e06f  just now
+@madhura22 @yculcarnee
+363 lines (274 sloc)  10.3 KB
+    
 #!/usr/bin/env python
 
 from __future__ import division
@@ -26,13 +46,13 @@ test_display = False
 test_write_video = True
 path_work_dir = "rl_3d/"
 vizdoom_path = "ViZDoom/"
-vizdoom_scenario = vizdoom_path + "scenarios/simpler_basic.wad"
+vizdoom_scenario = vizdoom_path + "scenarios/sabsesasta1.wad"
 
 # Lab parameters.
 if (lab):
     from env_lab import EnvLab
 
-    learning_rate = 0.00025  # 0.001
+    learning_rate = 0.0001   # 0.001
     discount_factor = 0.99
     step_num = int(5e5)  # int(1e6)
     replay_memory_size = int(1e6)
@@ -53,12 +73,12 @@ if (lab):
 
 # Vizdoom parameters.
 if (not lab):
-    from env_vizdoom import EnvVizDoom
+    from env_vizdoom_mvmt import EnvVizDoom
 
     learning_rate = 0.00025
     discount_factor = 0.99
-    step_num = int(5e4)
-    replay_memory_size = int(1e5)
+    step_num = int(5e5)
+    replay_memory_size = int(1e6)
     replay_memory_batch_size = 64
 
     frame_repeat = 10
@@ -285,13 +305,27 @@ def Test(agent):
         fps = 30.0 #/ frame_repeat
         fourcc = cv2.VideoWriter_fourcc(*'XVID')  # cv2.cv.CV_FOURCC(*'XVID')
         out_video = cv2.VideoWriter(path_work_dir + "test.avi", fourcc, fps, size)
+        
+    posX = []
+    posY = []
+    
+    posX.append('%')
+    posY.append('%')
 
     reward_total = 0
     num_episodes = 30
+    ep_counter = 1
+    reward_list = []
+    ep_list = []
     while (num_episodes != 0):
         if (not env.IsRunning()):
             env.Reset()
+            posX.append('%')
+            posY.append('%')
             print("Total reward: {}".format(reward_total))
+            reward_list.append(reward_total)
+            ep_list.append(ep_counter)
+            ep_counter += 1
             reward_total = 0
             num_episodes -= 1
 
@@ -316,6 +350,15 @@ def Test(agent):
                 break
 
             state_raw = env.Observation()
+            
+            posX.append(env.positionX())
+            posY.append(env.positionY())
+
+    print(reward_list)
+    print(ep_list)
+    print(posX)
+    print(posY)
+
 
 if __name__ == '__main__':
 
@@ -337,3 +380,15 @@ if __name__ == '__main__':
         agent.Train()
 
     Test(agent)
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
